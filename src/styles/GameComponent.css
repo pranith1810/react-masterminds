@@ -1,5 +1,5 @@
-.game {
-    display:flex;
+.game, .gameRunning {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -8,13 +8,19 @@
 
 .radio-buttons {
     margin: 1rem;
+    display:flex;
+    justify-content: center;
+}
+
+.radio-buttons label{
+    margin: 1rem 3rem;
+    font-size: 2em;
 }
 
 .number-input {
     margin: 1rem;
 }
 
-.guess{
+.guess {
     margin: 1rem;
 }
-
