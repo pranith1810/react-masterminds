@@ -11,9 +11,11 @@ class GameComponent extends React.Component {
             difficulty: '',
             numberInput: 0,
             randomNumber: null,
+            higherNumber: null,
             gameRunning: true,
             closeness: '',
-            closenessPic: ''
+            closenessPic: '',
+            closenessText: ''
         };
         this.handleGuessClick = this.handleGuessClick.bind(this);
         this.handleDifficultyChange = this.handleDifficultyChange.bind(this);
@@ -40,6 +42,21 @@ class GameComponent extends React.Component {
         this.setState({
             difficulty: event.target.id
         }, this.generateRandomNumber);
+        if (event.target.id === 'easy') {
+            this.setState({
+                higherNumber: '10'
+            })
+        }
+        else if (event.target.id === 'medium') {
+            this.setState({
+                higherNumber: '100'
+            })
+        }
+        else {
+            this.setState({
+                higherNumber: '1000'
+            })
+        }
     }
 
     handleInputChange(event) {
@@ -51,6 +68,11 @@ class GameComponent extends React.Component {
         let randomNum = this.state.randomNumber;
         let inputNum = Number(this.state.numberInput);
 
+        if (inputNum > Number(this.state.higherNumber) || inputNum < 0) {
+            alert('Please enter a number within limits')
+            return;
+        }
+
         if (this.state.difficulty !== '') {
             if (inputNum === randomNum) {
                 this.setState({
@@ -59,33 +81,36 @@ class GameComponent extends React.Component {
             }
             else {
                 if (randomNum < inputNum) {
-                    if (inputNum < randomNum + randomNum / 2)
+                    if (inputNum < randomNum + 15)
                         this.setState({
                             closeness: 'Smaller',
+                            closenessText: 'Hotter and closer',
                             closenessPic: closer
                         })
                     else {
                         this.setState({
-                            closeness: 'Smaller ',
+                            closeness: 'Smaller',
+                            closenessText: 'Colder and farther',
                             closenessPic: farther
                         })
                     }
                 }
                 else {
-                    if (inputNum > randomNum - randomNum / 2) {
+                    if (inputNum > randomNum - 15) {
                         this.setState({
                             closeness: 'Bigger',
+                            closenessText: 'Hotter and closer',
                             closenessPic: closer
                         })
                     }
                     else {
                         this.setState({
                             closeness: 'Bigger',
+                            closenessText: 'Colder and farther',
                             closenessPic: farther
                         })
                     }
                 }
-                console.log("Try again");
             }
             console.log(this.state);
         }
@@ -99,9 +124,11 @@ class GameComponent extends React.Component {
             difficulty: '',
             numberInput: 0,
             randomNumber: null,
+            higherNumber: null,
             gameRunning: true,
             closeness: '',
-            closenessPic: ''
+            closenessPic: '',
+            closenessText: ''
         });
     }
 
@@ -111,34 +138,48 @@ class GameComponent extends React.Component {
                 {this.state.gameRunning ?
                     <div className='gameRunning'>
                         <div className='radio-buttons'>
-                            <label>
-                                <input
-                                    onChange={this.handleDifficultyChange}
-                                    type='radio' name='difficulty' id='easy'
-                                    checked={this.state.difficulty === 'easy'}
-                                />
+
+                            <div className='radio-button'>
+                                <label>
+                                    <input
+                                        onChange={this.handleDifficultyChange}
+                                        type='radio' name='difficulty' id='easy'
+                                        checked={this.state.difficulty === 'easy'}
+                                    />
                                 Easy
-                            </label>
-                            <label>
-                                <input
-                                    onChange={this.handleDifficultyChange}
-                                    type='radio'
-                                    name='difficulty'
-                                    id='medium'
-                                    checked={this.state.difficulty === 'medium'}
-                                />
+                                </label>
+                            </div>
+
+                            <div className='radio-button'>
+                                <label>
+                                    <input
+                                        onChange={this.handleDifficultyChange}
+                                        type='radio'
+                                        name='difficulty'
+                                        id='medium'
+                                        checked={this.state.difficulty === 'medium'}
+                                    />
                                 Medium
-                            </label>
-                            <label>
-                                <input
-                                    onChange={this.handleDifficultyChange}
-                                    type='radio' name='difficulty'
-                                    id='hard'
-                                    checked={this.state.difficulty === 'hard'}
-                                />
+                                </label>
+                            </div>
+
+                            <div className='radio-button'>
+                                <label>
+                                    <input
+                                        onChange={this.handleDifficultyChange}
+                                        type='radio' name='difficulty'
+                                        id='hard'
+                                        checked={this.state.difficulty === 'hard'}
+                                    />
                                 Hard
-                            </label>
+                                </label>
+                            </div>
+
                         </div>
+
+                        {this.state.difficulty !== '' &&
+                            <p>Select a number between 0 to {this.state.higherNumber}</p>}
+
                         <input onChange={this.handleInputChange}
                             value={this.state.numberInput}
                             className='number-input'
@@ -146,8 +187,9 @@ class GameComponent extends React.Component {
                         />
                         <button onClick={this.handleGuessClick} className='guess'>Guess</button>
                         {this.state.closeness !== '' &&
-                            <div>
-                                <p>{this.state.closeness}</p>
+                            <div className='trialResult'>
+                                <p className='closeness'>{this.state.closeness}</p>
+                                <p className='closenessText'>{this.state.closenessText}</p>
                                 <img className='closenessPic' src={this.state.closenessPic} alt='closePic' />
                             </div>
                         }

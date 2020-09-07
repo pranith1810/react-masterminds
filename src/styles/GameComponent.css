@@ -3,24 +3,72 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
 }
 
 .radio-buttons {
     margin: 1rem;
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
-.radio-buttons label{
+.radio-buttons .radio-button {
     margin: 1rem 3rem;
     font-size: 2em;
+    padding: 1rem;
+}
+
+.radio-buttons .radio-button input {
+    height: 2em;
+    width: 1.8em;
+}
+
+.radio-buttons .radio-button:hover {
+    background-color: #28df99;
 }
 
 .number-input {
     margin: 1rem;
+    font-size:2em;
 }
 
 .guess {
-    margin: 1rem;
+    margin: 2rem;
+    font-size: 2em;
+    padding: 0.5rem 10rem;
+    background-color: #28df99;
+}
+
+.gameFinished{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gameFinished p{
+    font-size: 3em;
+}
+
+.gameFinished button{
+    margin: 2rem;
+    font-size: 2em;
+    padding: 0.5rem 10rem;
+    background-color: #28df99;
+}
+
+.trialResult {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trialResult .closeness{
+    font-size: 3em;
+}
+
+.trialResult .closenessText{
+    font-size: 1em;
+}
+
+.trialResult img{
+    height: 8rem;
 }
