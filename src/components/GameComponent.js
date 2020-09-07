@@ -8,11 +8,13 @@ class GameComponent extends React.Component {
         this.state = {
             difficulty: '',
             numberInput: 0,
-            randomNumber: 0
+            randomNumber: null,
+            gameRunning: true
         };
-        this.handleClick = this.handleClick.bind(this);
+        this.handleGuessClick = this.handleGuessClick.bind(this);
         this.handleDifficultyChange = this.handleDifficultyChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handlePlayAgainClick = this.handlePlayAgainClick.bind(this);
     }
 
     generateRandomNumber() {
@@ -34,19 +36,20 @@ class GameComponent extends React.Component {
         this.setState({
             difficulty: event.target.id
         }, this.generateRandomNumber);
-        
     }
 
     handleInputChange(event) {
         this.setState({ numberInput: event.target.value });
     }
 
-    handleClick() {
+    handleGuessClick() {
         if (this.state.difficulty === '') {
             alert('Please select the difficulty');
         }
         if (Number(this.state.numberInput) === this.state.randomNumber) {
-            console.log('Number matched');
+            this.setState({
+                gameRunning: false
+            });
         }
         else {
             console.log("Try again");
@@ -54,27 +57,46 @@ class GameComponent extends React.Component {
         console.log(this.state);
     }
 
+    handlePlayAgainClick() {
+        this.setState({
+            difficulty: '',
+            numberInput: 0,
+            randomNumber: null,
+            gameRunning: true
+        });
+    }
+
     render() {
-        return (
-            <div className='game'>
-                <div className='radio-buttons'>
-                    <label>
-                        <input onChange={this.handleDifficultyChange} type='radio' name='difficulty' id='easy' checked={this.state.difficulty === 'easy'} />
+        if (this.state.gameRunning) {
+            return (
+                <div className='game'>
+                    <div className='radio-buttons'>
+                        <label>
+                            <input onChange={this.handleDifficultyChange} type='radio' name='difficulty' id='easy' checked={this.state.difficulty === 'easy'} />
                         Easy
                     </label>
-                    <label>
-                        <input onChange={this.handleDifficultyChange} type='radio' name='difficulty' id='medium' checked={this.state.difficulty === 'medium'} />
+                        <label>
+                            <input onChange={this.handleDifficultyChange} type='radio' name='difficulty' id='medium' checked={this.state.difficulty === 'medium'} />
                         Medium
                     </label>
-                    <label>
-                        <input onChange={this.handleDifficultyChange} type='radio' name='difficulty' id='hard' checked={this.state.difficulty === 'hard'} />
+                        <label>
+                            <input onChange={this.handleDifficultyChange} type='radio' name='difficulty' id='hard' checked={this.state.difficulty === 'hard'} />
                         Hard
                     </label>
+                    </div>
+                    <input onChange={this.handleInputChange} value={this.state.numberInput} className='number-input' type='number' />
+                    <button onClick={this.handleGuessClick} className='guess'>Guess</button>
                 </div>
-                <input onChange={this.handleInputChange} value={this.state.numberInput} className='number-input' type='number' />
-                <button onClick={this.handleClick} className='guess'>Guess</button>
-            </div>
-        );
+            );
+        }
+        else {
+            return (
+                <div className="game">
+                    <p>You Win!!</p>
+                    <button onClick={this.handlePlayAgainClick}>Play Again</button>
+                </div>
+            );
+        }
     }
 }
 
