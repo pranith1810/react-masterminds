@@ -1,25 +1,27 @@
-.game, .gameRunning {
+.game{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.gameRunning {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .radio-buttons {
-    margin: 1rem;
     display: flex;
-    justify-content: center;
+    margin: 1rem;
 }
 
 .radio-buttons .radio-button {
-    margin: 1rem 3rem;
     font-size: 2em;
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 .radio-buttons .radio-button input {
     height: 2em;
-    width: 1.8em;
 }
 
 .radio-buttons .radio-button:hover {
@@ -28,14 +30,14 @@
 
 .number-input {
     margin: 1rem;
-    font-size:2em;
+    font-size:1.5em;
 }
 
 .guess {
-    margin: 2rem;
+    width:50%;
     font-size: 2em;
-    padding: 0.5rem 10rem;
     background-color: #28df99;
+    margin: 2rem 2rem;
 }
 
 .gameFinished{
@@ -59,10 +61,13 @@
     display:flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .trialResult .closeness{
-    font-size: 3em;
+    text-align: center;
+    font-size: 2em;
+    padding: 0 0.4rem;
 }
 
 .trialResult .closenessText{
@@ -71,4 +76,15 @@
 
 .trialResult img{
     height: 8rem;
+}
+
+@media all and (min-width:50em){
+
+    .guess {
+        width:auto;
+    }
+
+    .radio-buttons .radio-button{
+        margin: 0 2rem;
+    }
 }

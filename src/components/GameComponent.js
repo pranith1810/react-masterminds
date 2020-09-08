@@ -25,7 +25,6 @@ class GameComponent extends React.Component {
 
     generateRandomNumber() {
         let randNum = 0;
-        console.log(this.state.difficulty);
         if (this.state.difficulty === 'easy') {
             randNum = Math.floor(Math.random() * 10);
         }
@@ -44,17 +43,17 @@ class GameComponent extends React.Component {
         }, this.generateRandomNumber);
         if (event.target.id === 'easy') {
             this.setState({
-                higherNumber: '10'
+                higherNumber: 10
             })
         }
         else if (event.target.id === 'medium') {
             this.setState({
-                higherNumber: '100'
+                higherNumber: 100
             })
         }
         else {
             this.setState({
-                higherNumber: '1000'
+                higherNumber: 1000
             })
         }
     }
@@ -68,7 +67,7 @@ class GameComponent extends React.Component {
         let randomNum = this.state.randomNumber;
         let inputNum = Number(this.state.numberInput);
 
-        if (inputNum > Number(this.state.higherNumber) || inputNum < 0) {
+        if (inputNum > this.state.higherNumber || inputNum < 0 || this.state.numberInput === '') {
             alert('Please enter a number within limits')
             return;
         }
@@ -81,38 +80,37 @@ class GameComponent extends React.Component {
             }
             else {
                 if (randomNum < inputNum) {
-                    if (inputNum < randomNum + 15)
+                    if (inputNum < randomNum + this.state.higherNumber / 5)
                         this.setState({
-                            closeness: 'Smaller',
-                            closenessText: 'Hotter and closer',
+                            closeness: 'The number to be guessed is smaller',
+                            closenessText: 'You are getting hotter and closer!!!!',
                             closenessPic: closer
                         })
                     else {
                         this.setState({
-                            closeness: 'Smaller',
-                            closenessText: 'Colder and farther',
+                            closeness: 'The number to be guessed is smaller',
+                            closenessText: 'You are getting colder and farther',
                             closenessPic: farther
                         })
                     }
                 }
                 else {
-                    if (inputNum > randomNum - 15) {
+                    if (inputNum > randomNum - this.state.higherNumber / 5) {
                         this.setState({
-                            closeness: 'Bigger',
-                            closenessText: 'Hotter and closer',
+                            closeness: 'The number to be guessed is bigger',
+                            closenessText: 'You are getting hotter and closer!!!!',
                             closenessPic: closer
                         })
                     }
                     else {
                         this.setState({
-                            closeness: 'Bigger',
-                            closenessText: 'Colder and farther',
+                            closeness: 'The number to be guessed is bigger',
+                            closenessText: 'You are getting colder and farther',
                             closenessPic: farther
                         })
                     }
                 }
             }
-            console.log(this.state);
         }
         else {
             alert('Please select the difficulty');
