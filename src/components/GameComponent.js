@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/GameComponent.css';
+import RadioButton from './RadioButton.js';
 import closer from '../images/closer.jpg';
 import farther from '../images/farther.jpg';
 
@@ -38,6 +39,8 @@ class GameComponent extends React.Component {
     }
 
     handleDifficultyChange(event) {
+        console.log('nope')
+        console.log(event.target.id);
         this.setState({
             difficulty: event.target.id
         }, this.generateRandomNumber);
@@ -116,6 +119,7 @@ class GameComponent extends React.Component {
         else {
             alert('Please select the difficulty');
         }
+        console.log(this.state);
     }
 
     handlePlayAgainClick() {
@@ -138,41 +142,32 @@ class GameComponent extends React.Component {
                     <div className='gameRunning'>
                         <div className='radio-buttons'>
 
-                            <div className='radio-button'>
-                                <label>
-                                    <input
-                                        onChange={this.handleDifficultyChange}
-                                        type='radio' name='difficulty' id='easy'
-                                        checked={this.state.difficulty === 'easy'}
-                                    />
-                                Easy
-                                </label>
-                            </div>
+                            <RadioButton
+                                handleDifficultyChange={this.handleDifficultyChange}
+                                type='radio'
+                                name='difficulty'
+                                id='easy'
+                                displayText='Easy'
+                                checked={this.state.difficulty === 'easy'}
+                            />
 
-                            <div className='radio-button'>
-                                <label>
-                                    <input
-                                        onChange={this.handleDifficultyChange}
-                                        type='radio'
-                                        name='difficulty'
-                                        id='medium'
-                                        checked={this.state.difficulty === 'medium'}
-                                    />
-                                Medium
-                                </label>
-                            </div>
+                            <RadioButton
+                                handleDifficultyChange={this.handleDifficultyChange}
+                                type='radio'
+                                name='difficulty'
+                                id='medium'
+                                displayText='Medium'
+                                checked={this.state.difficulty === 'medium'}
+                            />
 
-                            <div className='radio-button'>
-                                <label>
-                                    <input
-                                        onChange={this.handleDifficultyChange}
-                                        type='radio' name='difficulty'
-                                        id='hard'
-                                        checked={this.state.difficulty === 'hard'}
-                                    />
-                                Hard
-                                </label>
-                            </div>
+                            <RadioButton
+                                handleDifficultyChange={this.handleDifficultyChange}
+                                type='radio'
+                                name='difficulty'
+                                id='hard'
+                                displayText='Hard'
+                                checked={this.state.difficulty === 'hard'}
+                            />
 
                         </div>
 
