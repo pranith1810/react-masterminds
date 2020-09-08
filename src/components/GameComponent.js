@@ -39,8 +39,6 @@ class GameComponent extends React.Component {
     }
 
     handleDifficultyChange(event) {
-        console.log('nope')
-        console.log(event.target.id);
         this.setState({
             difficulty: event.target.id
         }, this.generateRandomNumber);
@@ -119,7 +117,6 @@ class GameComponent extends React.Component {
         else {
             alert('Please select the difficulty');
         }
-        console.log(this.state);
     }
 
     handlePlayAgainClick() {
