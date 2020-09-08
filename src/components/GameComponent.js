@@ -67,12 +67,13 @@ class GameComponent extends React.Component {
         let randomNum = this.state.randomNumber;
         let inputNum = Number(this.state.numberInput);
 
-        if (inputNum > this.state.higherNumber || inputNum < 0 || this.state.numberInput === '') {
-            alert('Please enter a number within limits')
-            return;
-        }
-
         if (this.state.difficulty !== '') {
+
+            if (inputNum > this.state.higherNumber || inputNum < 0 || this.state.numberInput === '') {
+                alert('Please enter a number within limits')
+                return;
+            }
+
             if (inputNum === randomNum) {
                 this.setState({
                     gameRunning: false
