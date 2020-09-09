@@ -2,12 +2,13 @@ import React from 'react';
 import Header from './Header.js';
 import GameComponent from './GameComponent.js';
 import About from './About.js';
+import HomeComponent from './HomeComponent.js';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  // Link
-} from "react-router-dom";
+  Route
+} from 'react-router-dom';
+
 
 function App() {
   return (
@@ -18,8 +19,11 @@ function App() {
           <Route path='/about'>
             <About />
           </Route>
-          <Route path='/'>
+          <Route path='/play'>
             <GameComponent />
+          </Route>
+          <Route path='/'>
+            <HomeComponent />
           </Route>
         </Switch>
       </Router>

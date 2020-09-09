@@ -1,0 +1,21 @@
+.links {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    align-items: center;
+}
+
+.links .link {
+    font-size: 2em;
+    margin: 3rem;
+}
+
+.links .link a {
+    text-decoration: none;
+    padding: 0.5rem;
+    color: #1d2d50;
+}
+
+.links .link a:hover {
+    background-color: #28df99;
+}
